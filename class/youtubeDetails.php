@@ -13,13 +13,13 @@ class youtubeDetails {
 
 	public function getImages($url = NULL){
 		$this->getKey($url);
-		$this->image['big'] = 'http://img.youtube.com/vi/' . $this->key . '/0.jpg';
-		$this->image['small'] = 'http://i1.ytimg.com/vi/' . $this->key . '/default.jpg';
+        $this->image['big'] = 'http' . ( $this->isHttps() ? 's' : NULL ) . '://img.youtube.com/vi/' . $this->key . '/0.jpg';
+        $this->image['small'] = 'http' . ( $this->isHttps() ? 's' : NULL ) . '://i1.ytimg.com/vi/' . $this->key . '/default.jpg';
 	    return $this->image;
 	}
 	public function getEmbed($url = NULL){
 		$this->getKey($url);
-		return $this->embed = 'http://www.youtube.com/embed/' . $this->key;
+        return $this->embed = 'http' . ( $this->isHttps() ? 's' : NULL ) . '://www.youtube.com/embed/' . $this->key;
 	}
 	public function getInfor($url = NULL){
 		$this->getKey($url);
@@ -44,6 +44,9 @@ class youtubeDetails {
 		}
 	    return $this->key;
 	}
+    private function isHttps(){
+        return isset($_SERVER["HTTPS"]) ? TRUE : FALSE;
+    }
 	private function gData($url = NULL) {
 		$this->getKey($url);
 		$curl = curl_init('http://gdata.youtube.com/feeds/api/videos/' . $this->key);

@@ -36,14 +36,13 @@ class youtubeDetails {
 			'author' => array('name' => (string)$this->data->author->name,
 				'uri' => (string)$this->data->author->uri));
 	}
-	private function getKey($url = NULL){
-		if($url !== NULL) {
-		    $url = explode('v=',$url);
-		    $url = explode('&',$url[1]);
-		    $this->key = current($url);
-		}
-	    return $this->key;
-	}
+    private function getKey($url = NULL){
+        if($url !== NULL) {
+            preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user)\/))([^\?&\"'>]+)/", $url, $matches);
+            $this->key = $matches[1];
+        }
+        return $this->key;
+    }
 	private function gData($url = NULL) {
 		$this->getKey($url);
 		$curl = curl_init('http://gdata.youtube.com/feeds/api/videos/' . $this->key);

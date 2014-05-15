@@ -33,8 +33,7 @@ class youtubeDetails {
 			'published' => $this->data->published,
 			'updated' => $this->data->updated,
 			'title' => $this->data->title,
-			'author' => array('name' => (string)$this->data->author->name,
-				'uri' => (string)$this->data->author->uri));
+			'author' => array('name' => (string)$this->data->author->name);
 	}
     private function getKey($url = NULL){
         if($url !== NULL) {

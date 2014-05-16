@@ -32,8 +32,8 @@ class youtubeDetails {
 			'embed' => $this->embed,
 			'published' => $this->data->published,
 			'updated' => $this->data->updated,
-			'title' => $this->data->title,
-			'description' => $this->data->content,
+			'title' => (string)$this->data->title,
+			'description' => (string)$this->data->content,
 			'author' => (string)$this->data->author->name);
 	}
     private function getKey($url = NULL){
